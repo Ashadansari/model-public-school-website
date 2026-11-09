@@ -107,8 +107,19 @@
       status.classList.add('error');
       return;
     }
-    status.textContent = 'Your enquiry is complete and ready. This preview does not send messages; please contact the school directly to follow up.';
-    form.reset();
+    const fields = new FormData(form);
+    const body = [
+      `Parent / Guardian: ${fields.get('guardian')}`,
+      `Phone: ${fields.get('phone')}`,
+      `Email: ${fields.get('email') || 'Not provided'}`,
+      `Student: ${fields.get('student') || 'Not provided'}`,
+      '',
+      'Message:',
+      fields.get('message')
+    ].join('\n');
+    const mailto = `mailto:modelpublicschool2063@gmail.com?subject=${encodeURIComponent('Enquiry for Model Public School')}&body=${encodeURIComponent(body)}`;
+    status.textContent = 'Your email app should open with the enquiry prepared. Review it and send it to the school.';
+    window.location.href = mailto;
   });
 
   document.querySelector('#year').textContent = new Date().getFullYear();
