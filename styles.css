@@ -22,3 +22,4 @@
 .facebook-contact a{display:inline-flex;align-items:center;gap:7px}.facebook-mark{display:block;width:16px;height:16px;flex:none}
 .subject-dialog-actions{display:flex;align-items:center;gap:8px;flex:none}.translation-toggle{min-height:38px;padding:0 12px;border:1px solid var(--line);background:#fff;color:var(--navy);font-size:11px;font-weight:600;cursor:pointer}.translation-toggle:hover{background:var(--cream);color:var(--blue)}.translation-toggle:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
 @media(max-width:560px){.subject-dialog-head{gap:10px}.subject-dialog-actions{gap:6px}.translation-toggle{padding:0 9px;font-size:10px}.subject-dialog-close{width:34px;height:34px}}
+.subject-dialog .eyebrow>span:not(:first-child){display:inline;width:auto;height:auto;background:transparent;white-space:nowrap}
