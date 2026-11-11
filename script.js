@@ -19,7 +19,10 @@
     nav.classList.toggle('open', open);
     document.body.classList.toggle('menu-open', open);
   });
-  navLinks.forEach(link => link.addEventListener('click', closeMenu));
+  nav.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && menuButton.getAttribute('aria-expanded') === 'true') closeMenu();
+  });
   window.addEventListener('resize', () => { if (window.innerWidth > 800) closeMenu(); });
 
   const updateHeader = () => header.classList.toggle('scrolled', window.scrollY > 20);
