@@ -126,7 +126,40 @@
   });
 
   const subjectDialog = document.querySelector('#subject-catalog');
-  document.querySelector('.subject-catalog-trigger').addEventListener('click', () => subjectDialog.showModal());
+  const subjectTitle = document.querySelector('#subject-catalog-title');
+  const subjectEyebrow = document.querySelector('#subject-catalog-eyebrow');
+  const subjectIntro = document.querySelector('#subject-catalog-intro');
+  const subjectItems = [...subjectDialog.querySelectorAll('.subject-catalog-list li')];
+  const subjectTranslationButton = document.querySelector('#subject-translation-toggle');
+  const subjectEnglish = {
+    title: 'Major subjects',
+    eyebrow: 'Model Public School',
+    intro: 'Explore the major subjects offered at our school.',
+    subjects: ['English', 'Mathematics', 'Computer', 'Urdu', 'Quran', 'Science']
+  };
+  const subjectNepali = {
+    title: 'प्रमुख विषयहरू',
+    eyebrow: 'मोडेल पब्लिक स्कुल',
+    intro: 'हाम्रो विद्यालयमा पढाइने प्रमुख विषयहरू हेर्नुहोस्।',
+    subjects: ['अङ्ग्रेजी', 'गणित', 'कम्प्युटर', 'उर्दू', 'कुरआन', 'विज्ञान']
+  };
+  const setSubjectLanguage = nepali => {
+    const language = nepali ? subjectNepali : subjectEnglish;
+    subjectDialog.lang = nepali ? 'ne' : 'en';
+    subjectTitle.textContent = language.title;
+    subjectEyebrow.textContent = language.eyebrow;
+    subjectIntro.textContent = language.intro;
+    subjectItems.forEach((item, index) => { item.textContent = language.subjects[index]; });
+    subjectTranslationButton.textContent = nepali ? 'अंग्रेजीमा हेर्नुहोस्' : 'See translation';
+    subjectTranslationButton.setAttribute('aria-pressed', String(nepali));
+  };
+  subjectTranslationButton.addEventListener('click', () => {
+    setSubjectLanguage(subjectTranslationButton.getAttribute('aria-pressed') !== 'true');
+  });
+  document.querySelector('.subject-catalog-trigger').addEventListener('click', () => {
+    setSubjectLanguage(false);
+    subjectDialog.showModal();
+  });
   document.querySelector('.subject-dialog-close').addEventListener('click', () => subjectDialog.close());
   subjectDialog.addEventListener('click', event => {
     if (event.target === subjectDialog) subjectDialog.close();
@@ -136,11 +169,49 @@
   const detailTitle = document.querySelector('#learning-detail-title');
   const detailSummary = document.querySelector('#learning-detail-summary');
   const detailCopy = document.querySelector('#learning-detail-copy');
+  const learningEyebrow = document.querySelector('#learning-detail-eyebrow');
+  const learningTranslationButton = document.querySelector('#learning-translation-toggle');
+  const learningTranslations = {
+    'Teaching & learning': {
+      title: 'शिक्षण तथा सिकाइ',
+      summary: 'मैत्रीपूर्ण शिक्षकहरूबाट व्यक्तिगत मार्गदर्शन',
+      detail: 'हाम्रा शिक्षकहरूले स्पष्ट व्याख्या, मैत्रीपूर्ण मार्गदर्शन र व्यक्तिगत परामर्शमार्फत विद्यार्थीहरूलाई कठिन विषय बुझ्न मद्दत गर्छन्। विद्यार्थीहरूलाई प्रश्न सोध्न, आत्मविश्वास बढाउन र आफ्नै गतिमा सिकिरहन प्रोत्साहित गरिन्छ।'
+    },
+    'Classroom activities': {
+      title: 'कक्षाकोठाका गतिविधिहरू',
+      summary: 'सक्रिय सहभागिता र सँगै सिक्ने अवसर',
+      detail: 'कक्षाकोठाका गतिविधिहरूले विद्यार्थीहरूलाई सहभागी हुन, नयाँ सीप अभ्यास गर्न, प्रश्न सोध्न र आफ्ना विचार बाँड्न अवसर दिन्छन्। सँगै सिक्दा विद्यार्थीहरू सक्रिय रहन्छन् र एकअर्काबाट सिक्छन्।'
+    },
+    'Student development': {
+      title: 'विद्यार्थी विकास',
+      summary: 'आत्मविश्वासका साथ अघि बढ्न प्रोत्साहन',
+      detail: 'हामी विद्यार्थीहरूलाई पढाइसँगै आत्मविश्वास, जिम्मेवारी र सकारात्मक बानी विकास गर्न प्रोत्साहित गर्छौँ। शिक्षकहरूले प्रत्येक विद्यार्थीलाई प्रगति गर्न, नयाँ चुनौती लिन र आफ्नै गतिमा अघि बढ्न सहयोग गर्छन्।'
+    },
+    'Academic environment': {
+      title: 'शैक्षिक वातावरण',
+      summary: 'ध्यान दिन र अघि बढ्न स्वागतयोग्य ठाउँ',
+      detail: 'विद्यार्थीहरूले सहज महसुस गर्दै सिक्न र प्रश्न सोध्न सक्ने स्वागतयोग्य तथा एकाग्र वातावरण प्रदान गर्ने हाम्रो लक्ष्य हो। सहयोगी शैक्षिक वातावरणले विद्यार्थीहरूलाई ध्यान दिन, सहभागी हुन र सँगै अघि बढ्न मद्दत गर्छ।'
+    }
+  };
+  let activeLearningButton = null;
+  const setLearningLanguage = nepali => {
+    const englishTitle = activeLearningButton.dataset.title;
+    const translation = learningTranslations[englishTitle];
+    learningDetailDialog.lang = nepali ? 'ne' : 'en';
+    detailTitle.textContent = nepali ? translation.title : englishTitle;
+    detailSummary.textContent = nepali ? translation.summary : activeLearningButton.dataset.summary;
+    detailCopy.textContent = nepali ? translation.detail : activeLearningButton.dataset.detail;
+    learningEyebrow.textContent = nepali ? 'सिकाइको अनुभव' : 'The learning experience';
+    learningTranslationButton.textContent = nepali ? 'अंग्रेजीमा हेर्नुहोस्' : 'See translation';
+    learningTranslationButton.setAttribute('aria-pressed', String(nepali));
+  };
+  learningTranslationButton.addEventListener('click', () => {
+    setLearningLanguage(learningTranslationButton.getAttribute('aria-pressed') !== 'true');
+  });
   document.querySelectorAll('.learning-detail-trigger').forEach(button => {
     button.addEventListener('click', () => {
-      detailTitle.textContent = button.dataset.title;
-      detailSummary.textContent = button.dataset.summary;
-      detailCopy.textContent = button.dataset.detail;
+      activeLearningButton = button;
+      setLearningLanguage(false);
       learningDetailDialog.showModal();
     });
   });

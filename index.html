@@ -13,8 +13,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css?v=20261111-3" />
-    <script src="script.js?v=20261111-3" defer></script>
+    <link rel="stylesheet" href="styles.css?v=20261111-4" />
+    <script src="script.js?v=20261111-4" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -92,14 +92,14 @@
         </div>
       </section>
 
-      <dialog class="subject-dialog" id="subject-catalog" aria-labelledby="subject-catalog-title">
-        <div class="subject-dialog-head"><div><p class="eyebrow"><span></span> Model Public School</p><h2 id="subject-catalog-title">Major subjects</h2></div><button class="subject-dialog-close" type="button" aria-label="Close subject catalog">×</button></div>
-        <p class="subject-dialog-intro">Explore the major subjects offered at our school.</p>
+      <dialog class="subject-dialog" id="subject-catalog" lang="en" aria-labelledby="subject-catalog-title">
+        <div class="subject-dialog-head"><div><p class="eyebrow"><span></span> <span id="subject-catalog-eyebrow">Model Public School</span></p><h2 id="subject-catalog-title">Major subjects</h2></div><div class="subject-dialog-actions"><button class="translation-toggle" id="subject-translation-toggle" type="button" aria-pressed="false">See translation</button><button class="subject-dialog-close" type="button" aria-label="Close subject catalog">×</button></div></div>
+        <p class="subject-dialog-intro" id="subject-catalog-intro">Explore the major subjects offered at our school.</p>
         <ul class="subject-catalog-list"><li>English</li><li>Mathematics</li><li>Computer</li><li>Urdu</li><li>Quran</li><li>Science</li></ul>
       </dialog>
 
-      <dialog class="subject-dialog learning-detail-dialog" id="learning-detail-dialog" aria-labelledby="learning-detail-title">
-        <div class="subject-dialog-head"><div><p class="eyebrow"><span></span> The learning experience</p><h2 id="learning-detail-title">Teaching &amp; learning</h2></div><button class="subject-dialog-close feature-dialog-close" type="button" aria-label="Close explanation">×</button></div>
+      <dialog class="subject-dialog learning-detail-dialog" id="learning-detail-dialog" lang="en" aria-labelledby="learning-detail-title">
+        <div class="subject-dialog-head"><div><p class="eyebrow"><span></span> <span id="learning-detail-eyebrow">The learning experience</span></p><h2 id="learning-detail-title">Teaching &amp; learning</h2></div><div class="subject-dialog-actions"><button class="translation-toggle" id="learning-translation-toggle" type="button" aria-pressed="false">See translation</button><button class="subject-dialog-close feature-dialog-close" type="button" aria-label="Close explanation">×</button></div></div>
         <p class="subject-dialog-intro" id="learning-detail-summary"></p>
         <p class="learning-detail-copy" id="learning-detail-copy"></p>
       </dialog>
