@@ -122,6 +122,30 @@
     window.location.href = mailto;
   });
 
+  const subjectDialog = document.querySelector('#subject-catalog');
+  document.querySelector('.subject-catalog-trigger').addEventListener('click', () => subjectDialog.showModal());
+  document.querySelector('.subject-dialog-close').addEventListener('click', () => subjectDialog.close());
+  subjectDialog.addEventListener('click', event => {
+    if (event.target === subjectDialog) subjectDialog.close();
+  });
+
+  const learningDetailDialog = document.querySelector('#learning-detail-dialog');
+  const detailTitle = document.querySelector('#learning-detail-title');
+  const detailSummary = document.querySelector('#learning-detail-summary');
+  const detailCopy = document.querySelector('#learning-detail-copy');
+  document.querySelectorAll('.learning-detail-trigger').forEach(button => {
+    button.addEventListener('click', () => {
+      detailTitle.textContent = button.dataset.title;
+      detailSummary.textContent = button.dataset.summary;
+      detailCopy.textContent = button.dataset.detail;
+      learningDetailDialog.showModal();
+    });
+  });
+  document.querySelector('.feature-dialog-close').addEventListener('click', () => learningDetailDialog.close());
+  learningDetailDialog.addEventListener('click', event => {
+    if (event.target === learningDetailDialog) learningDetailDialog.close();
+  });
+
   document.querySelector('#year').textContent = new Date().getFullYear();
   if (reduceMotion) document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
 })();
